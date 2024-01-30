@@ -6,6 +6,7 @@
   padding: 0px; /* Remove padding to allow full width use */
   margin-left: 0px; /* Align with the timeline's left edge */
   width: 100%; /* Ensure the list takes full width */
+  align-items: center;
 }
 
 .device-item h3 {

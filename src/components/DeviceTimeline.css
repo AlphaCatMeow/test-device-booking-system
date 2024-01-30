@@ -2,16 +2,13 @@
 .device-timeline {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center; /* Center timeline items on the screen */
-  gap: 0;
-  padding: 0px;
-  margin-left: 100px;
-  margin-right: 100px;
+  width: 100%;
 }
 
 .time-blocks {
   display: flex;
+  width: fit-content;
 }
 
 .time-block {
@@ -41,12 +38,13 @@
 .time-label-blocks {
   display: flex;
   margin-left: -32px; /* 向左移动一格 */
+  width: fit-content;
 }
 
 .time-labels {
   display: flex;
   justify-content: space-between;
-  padding-left: 32px; /* 根据需要调整 */
+  padding-left: 0px; /* 根据需要调整 */
 }
 
 .time-label {
