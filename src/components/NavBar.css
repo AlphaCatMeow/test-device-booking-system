@@ -1,0 +1,13 @@
+/* NavBar.css */
+
+.navbar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Adjust the height as needed */
+    width: 100%; /* This ensures the navbar stretches across the full width */
+    margin-top: 20px; /* Add space at the top of the navbar */
+  }
+  
+  /* Add other styles for the navbar as needed */
+  

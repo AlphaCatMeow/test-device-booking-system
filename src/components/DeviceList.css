@@ -1,0 +1,21 @@
+/* DeviceList.css */
+
+.devices-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0px; /* Remove padding to allow full width use */
+  margin-left: 0px; /* Align with the timeline's left edge */
+  width: 100%; /* Ensure the list takes full width */
+}
+
+.device-item h3 {
+  margin-left: 50%; /* Align device name with the timeline's left edge */
+  padding-left: 0px; /* Remove padding to align text */
+}
+
+/* Ensure the device timeline is full width to align with the device name */
+.device-item > div {
+  width: 100%;
+}
+
+/* Add other styles for the device list as needed */

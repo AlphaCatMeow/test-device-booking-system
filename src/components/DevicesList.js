@@ -1,5 +1,6 @@
 import React from 'react';
 import DeviceTimeline from './DeviceTimeline'; // 这将是您的时间轴组件
+import './DeviceList.css'; // 引入样式文件
 
 // 定义6个设备的信息
 const devices = [
@@ -15,7 +16,7 @@ const DevicesList = () => {
   return (
     <div className="devices-list">
       {devices.map(device => (
-        <div key={device.id} className="device">
+        <div key={device.id} className="device-item">
           <h3>{device.name}</h3>
           <DeviceTimeline deviceId={device.id} />
         </div>
