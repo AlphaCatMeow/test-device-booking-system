@@ -1,20 +1,17 @@
 /* Add other styles as needed */
 .device-timeline {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center; /* Center timeline items on the screen */
   gap: 0;
   padding: 0px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
-.time-block-container {
+.time-blocks {
   display: flex;
-}
-
-.time-block-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .time-block {
@@ -32,8 +29,28 @@
   background-color: #4caf50; /* 选中状态的背景色 */
 }
 
+.time-label-block {
+  width: 32px;
+  height: 32px;
+  box-sizing: border-box;
+  border: 1px solid #00000000;
+  flex-direction: column;
+  align-items: center;
+}
+
+.time-label-blocks {
+  display: flex;
+  margin-left: -32px; /* 向左移动一格 */
+}
+
+.time-labels {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 32px; /* 根据需要调整 */
+}
+
 .time-label {
-  font-size: 15px; /* 根据需要调整字体大小 */
-  color: #666; /* 根据需要调整字体颜色 */
-  margin-top: 5px; /* 调整时间标签与时间块之间的间距 */
+  margin-top: 6px;
+  width: 64px; /* 根据需要调整 */
+  text-align: center;
 }

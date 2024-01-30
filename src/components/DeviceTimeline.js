@@ -44,10 +44,9 @@ const DeviceTimeline = ({ deviceId }) => {
 
   return (
     <div className="device-timeline" onMouseLeave={() => setIsSelecting(false)}>
-      {Array.from({ length: 48 }).map((_, index) => (
-        <div>
-          <div key={index} className="time-block-wrapper">
-          <div
+      <div className="time-blocks">
+        {Array.from({ length: 48 }).map((_, index) => (
+          <div key={index}
             className={`time-block ${
               selectedBlocks.includes(index) ? "selected" : ""
             } ${index < disabledUntilBlock ? "disabled" : ""}`}
@@ -55,15 +54,17 @@ const DeviceTimeline = ({ deviceId }) => {
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseUp={handleMouseUp}
           ></div>
-        </div>  
-        
-        <div className="time-hour">
-          {index % 2 === 0 && ( // 每个小时的开始处添加小时数
-            <div className="time-label">{index / 2}</div>
-          )}
-        </div>
-        </div>
-      ))}
+        ))}
+      </div>
+      
+      <div className="time-label-blocks">
+        {Array.from({ length: 50 }).map((_, index) => (
+          <div key={index} className="time-label-block">
+            {index % 2 === 0 && <div className="time-label">{index / 2}</div>}
+          </div>
+        ))}
+      </div>
+
       <Modal
         title="确认预订"
         visible={showModal}
