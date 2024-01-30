@@ -46,7 +46,8 @@ const DeviceTimeline = ({ deviceId }) => {
     <div className="device-timeline" onMouseLeave={() => setIsSelecting(false)}>
       <div className="time-blocks">
         {Array.from({ length: 48 }).map((_, index) => (
-          <div key={index}
+          <div
+            key={index}
             className={`time-block ${
               selectedBlocks.includes(index) ? "selected" : ""
             } ${index < disabledUntilBlock ? "disabled" : ""}`}
@@ -56,7 +57,7 @@ const DeviceTimeline = ({ deviceId }) => {
           ></div>
         ))}
       </div>
-      
+
       <div className="time-label-blocks">
         {Array.from({ length: 50 }).map((_, index) => (
           <div key={index} className="time-label-block">
