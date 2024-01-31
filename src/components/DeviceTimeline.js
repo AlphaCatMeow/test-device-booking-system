@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Modal } from "antd"; // 引入Modal组件
 import "./DeviceTimeline.css"; // 确保引入了CSS样式
+import { ExclamationCircleFilled } from '@ant-design/icons';
 
 const DeviceTimeline = ({ deviceId }) => {
   const [selectedBlocks, setSelectedBlocks] = useState([]);
   const [isSelecting, setIsSelecting] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showPromiseConfirm, setShowPromiseConfirm] = useState(false); // 添加一个状态变量来控制显示或隐藏]
 
   const currentTime = new Date();
   const currentHour = currentTime.getHours();
