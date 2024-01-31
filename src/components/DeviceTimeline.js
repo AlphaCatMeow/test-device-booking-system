@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { Modal } from "antd"; // 引入Modal组件
 import "./DeviceTimeline.css"; // 确保引入了CSS样式
 import { ExclamationCircleFilled } from '@ant-design/icons';
+const { confirm } = Modal;
 
 const DeviceTimeline = ({ deviceId }) => {
   const [selectedBlocks, setSelectedBlocks] = useState([]);
   const [isSelecting, setIsSelecting] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const [showPromiseConfirm, setShowPromiseConfirm] = useState(false); // 添加一个状态变量来控制显示或隐藏]
 
   const currentTime = new Date();
   const currentHour = currentTime.getHours();
@@ -30,18 +29,23 @@ const DeviceTimeline = ({ deviceId }) => {
   const handleMouseUp = () => {
     setIsSelecting(false);
     if (selectedBlocks.length > 0) {
-      setShowModal(true);
+      // 在这里调用 showPromiseConfirm 来处理删除确认
+      showPromiseConfirm();
     }
   };
 
-  const handleOk = () => {
-    // 这里可以添加预订逻辑
-    setShowModal(false);
-  };
-
-  const handleCancel = () => {
-    setShowModal(false);
-    setSelectedBlocks([]); // 取消选择时清空选中的时间块
+  const showPromiseConfirm = () => {
+    confirm({
+      title: 'Do you want to delete these items?',
+      icon: <ExclamationCircleFilled />,
+      content: 'When clicked the OK button, this dialog will be closed after 1 second',
+      onOk() {
+        return new Promise((resolve, reject) => {
+          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+        }).catch(() => console.log('Oops errors!'));
+      },
+      onCancel() {setSelectedBlocks([]);},
+    });
   };
 
   return (
@@ -68,14 +72,6 @@ const DeviceTimeline = ({ deviceId }) => {
         ))}
       </div>
 
-      <Modal
-        title="确认预订"
-        visible={showModal}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <p>您是否要预订设备{deviceId}在选中的时间段？</p>
-      </Modal>
     </div>
   );
 };
