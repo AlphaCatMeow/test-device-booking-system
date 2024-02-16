@@ -4,7 +4,7 @@ import "./DeviceTimeline.css";
 import { ExclamationCircleFilled } from '@ant-design/icons';
 const { confirm } = Modal;
 
-const DeviceTimeline = ({ deviceId }) => {
+const DeviceTimeline = ({ deviceId, selectedDate }) => {
   const [selectedBlocks, setSelectedBlocks] = useState([]);
   const [isSelecting, setIsSelecting] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -81,7 +81,7 @@ const DeviceTimeline = ({ deviceId }) => {
       confirm({
         title: '预定设备?',
         icon: <ExclamationCircleFilled />,
-        content: `请确认预订从${startTime}到${endTime}使用${deviceName}？`,
+        content: `请确认预订${selectedDate}从${startTime}到${endTime}使用${deviceName}？`, // 修改弹框内容以包含selectedDate
         onOk() {
           setIsModalVisible(false);
           return new Promise((resolve, reject) => {

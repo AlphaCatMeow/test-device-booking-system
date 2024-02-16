@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import NavBar from './components/NavBar'; // 导入NavBar组件
-import DevicesList from './components/DevicesList'; // 导入DevicesList组件
+import NavBar from './components/NavBar';
+import DevicesList from './components/DevicesList';
+import dayjs from 'dayjs'; // 引入dayjs库来处理日期
 
 function App() {
+  // 使用dayjs获取当前日期，并格式化为'YYYY-MM-DD'格式作为默认选中的日期
+  const [selectedDate, setSelectedDate] = useState(dayjs().format('YYYY-MM-DD'));
+
+  const handleDateSelect = (date) => {
+    setSelectedDate(date); // 更新选中的日期
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <NavBar /> {/* 使用NavBar组件 */}
+        <NavBar onDateSelect={handleDateSelect} />
       </header>
       <main>
-        {/* 移除了原有的占位符内容，并添加了DevicesList组件来展示设备列表和时间轴 */}
-        <DevicesList />
+        <DevicesList selectedDate={selectedDate} />
       </main>
     </div>
   );

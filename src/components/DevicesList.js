@@ -12,13 +12,13 @@ const devices = [
   { id: 6, name: 'BT 2#' }
 ];
 
-const DevicesList = () => {
+const DevicesList = ({ selectedDate }) => { // 接收selectedDate作为prop
   return (
     <div className="devices-list">
       {devices.map(device => (
         <div key={device.id} className="device-item">
           <h3>{device.name}</h3>
-          <DeviceTimeline deviceId={device.id} />
+          <DeviceTimeline deviceId={device.id} selectedDate={selectedDate} /> {/* 将selectedDate作为prop传递给DeviceTimeline */}
         </div>
       ))}
     </div>
