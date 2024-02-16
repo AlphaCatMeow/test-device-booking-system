@@ -1,12 +1,30 @@
-import React, { useState } from "react";
-import { Modal } from "antd"; // 引入Modal组件
-import "./DeviceTimeline.css"; // 确保引入了CSS样式
+import React, { useState, useContext } from "react";
+import { Modal } from "antd";
+import "./DeviceTimeline.css";
 import { ExclamationCircleFilled } from '@ant-design/icons';
 const { confirm } = Modal;
 
 const DeviceTimeline = ({ deviceId }) => {
   const [selectedBlocks, setSelectedBlocks] = useState([]);
   const [isSelecting, setIsSelecting] = useState(false);
+
+  const devices = [
+    { id: 1, name: 'HIL 1#' },
+    { id: 2, name: 'HIL 2#' },
+    { id: 3, name: '集成 1#' },
+    { id: 4, name: '集成 2#' },
+    { id: 5, name: 'BT 1#' },
+    { id: 6, name: 'BT 2#' }
+  ];
+  
+  const getDeviceNameById = (deviceId) => {
+    const device = devices.find(device => device.id === deviceId);
+    return device ? device.name : undefined;
+  };
+  
+  // Use DeviceContext or a function to get the device name
+  // const { getDeviceNameById } = useContext(DeviceContext);
+  const deviceName = getDeviceNameById(deviceId); // Replace with actual function/context
 
   const currentTime = new Date();
   const currentHour = currentTime.getHours();
@@ -29,23 +47,48 @@ const DeviceTimeline = ({ deviceId }) => {
   const handleMouseUp = () => {
     setIsSelecting(false);
     if (selectedBlocks.length > 0) {
-      // 在这里调用 showPromiseConfirm 来处理删除确认
       showPromiseConfirm();
     }
   };
 
+  const calculateTimeRange = () => {
+    if (selectedBlocks.length > 0) {
+      const blockDurationMinutes = 30; // 每个时间块代表30分钟
+      const startTimeIndex = Math.min(...selectedBlocks);
+      const endTimeIndex = Math.max(...selectedBlocks) + 1; // 加1因为结束时间是下一个时间块的开始
+  
+      // 计算小时和分钟
+      const startHours = Math.floor(startTimeIndex * blockDurationMinutes / 60);
+      const startMinutes = (startTimeIndex * blockDurationMinutes) % 60;
+      const endHours = Math.floor(endTimeIndex * blockDurationMinutes / 60);
+      const endMinutes = (endTimeIndex * blockDurationMinutes) % 60;
+  
+      // 格式化时间为24小时制，精确到半小时
+      const startTime = `${startHours.toString().padStart(2, '0')}:${startMinutes.toString().padStart(2, '0')}`;
+      const endTime = `${endHours.toString().padStart(2, '0')}:${endMinutes.toString().padStart(2, '0')}`;
+  
+      return { startTime, endTime };
+    }
+    return { startTime: null, endTime: null };
+  };
+
   const showPromiseConfirm = () => {
-    confirm({
-      title: 'Do you want to delete these items?',
-      icon: <ExclamationCircleFilled />,
-      content: 'When clicked the OK button, this dialog will be closed after 1 second',
-      onOk() {
-        return new Promise((resolve, reject) => {
-          setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
-        }).catch(() => console.log('Oops errors!'));
-      },
-      onCancel() {setSelectedBlocks([]);},
-    });
+    const { startTime, endTime } = calculateTimeRange();
+    if (startTime !== null && endTime !== null) {
+      confirm({
+        title: '预定设备?',
+        icon: <ExclamationCircleFilled />,
+        content: `请确认是否需要预订设备${deviceId}从${startTime}到${endTime}的使用？`,
+        onOk() {
+          return new Promise((resolve, reject) => {
+            setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+          }).catch(() => console.log('预定失败！'));
+        },
+        onCancel() {
+          setSelectedBlocks([]);
+        },
+      });
+    }
   };
 
   return (
