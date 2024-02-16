@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center; /* Center timeline items on the screen */
   width: 100%;
+  user-select: none; /* 阻止在时间线上的文本选择 */
 }
 
 .time-blocks {
@@ -39,16 +40,19 @@
   display: flex;
   margin-left: -32px; /* 向左移动一格 */
   width: fit-content;
+  user-select: none; /* 阻止在时间标签上的文本选择 */
 }
 
 .time-labels {
   display: flex;
   justify-content: space-between;
   padding-left: 0px; /* 根据需要调整 */
+  user-select: none; /* 阻止在时间标签上的文本选择 */
 }
 
 .time-label {
   margin-top: 6px;
   width: 64px; /* 根据需要调整 */
   text-align: center;
+  user-select: none; /* 阻止在时间标签上的文本选择 */
 }
