@@ -27,6 +27,11 @@
   background-color: #4caf50; /* 选中状态的背景色 */
 }
 
+.time-block.reserved {
+  background-color: #9c9c9c; /* 深灰色背景 */
+  pointer-events: none; /* 禁用鼠标事件 */
+}
+
 .time-label-block {
   width: 32px;
   height: 32px;
